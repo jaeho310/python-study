@@ -1,10 +1,9 @@
 import re
-p = re.compile("^python\s\w+", re.MULTILINE)
+data = """
+aa@gmail.com
+bb@naver.com
+"""
+regex = re.compile("^[a-z0-9]+@[a-z]+.[a-z]{2,4}$",re.MULTILINE|re.IGNORECASE)
+result = regex.findall(data)
+print(result)
 
-data = """python one
-life is too short
-python two
-you need python
-python three"""
-
-print(p.findall(data))

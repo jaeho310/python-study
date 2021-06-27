@@ -198,3 +198,12 @@ re.MULTILINE 옵션을 사용하면
 주석을 달기 위해 사용됩니다.
 []외부에 들어간 주석, whitespace는 모두 제거됩니다.
 
+```python
+import re
+data = """
+aa@gmail.com
+bb@naver.com
+"""
+regex = re.com
+^[a-zA-Z0-9]+@[a-z]+.[a-z]{2,4}$
+```
