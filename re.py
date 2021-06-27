@@ -1,7 +1,10 @@
 import re
+p = re.compile("^python\s\w+", re.MULTILINE)
 
-text = "hello world"
-regex = re.compile("[a-z]+.[a-z]")
-result =  regex.match(text)
+data = """python one
+life is too short
+python two
+you need python
+python three"""
 
-print(result)
+print(p.findall(data))
