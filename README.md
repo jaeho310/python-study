@@ -2,13 +2,13 @@
 
 ## 개요
 - Test Processing Services
-    - [re](re.md)
-    - [stringprep](stringprep.md)
-    - [readline](readline.md)
-    - [rlcompleter](rlcompleter.md)
+    - [re](study_re.md)
+    - [stringprep](study_stringprep.md)
+    - [readline](study_readline.md)
+    - [rlcompleter](study_rlcompleter.md)
 - Binary Data Service
-    - [struct](struct.md)
-    - [codecs](codecs.md)
+    - [struct](study_struct.md)
+    - [codecs](study_codecs.md)
 
 ## 참조
 - [정규표현식 사이트](http://regexr.com)
