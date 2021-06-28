@@ -1,0 +1,13 @@
+exit()
+exec(open("/root/python-study/readline/study_readline.py").read())
+print("1")
+2 ** 10
+import math
+math.factorial(6)
+exit()
+exec(open("/root/python-study/readline/study_readline.py").read())
+hello
+print(hello)
+print("hello)
+print("hello")
+exit()

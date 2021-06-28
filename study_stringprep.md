@@ -12,8 +12,8 @@ print(data)
 ```
 
 ## RFC 3454란
-- 인터넷 프로토콜에서 유니코드를 식별하는 과정을 담은 규약 및 절차
-
+- 인터넷 프로토콜에서 유니코드를 식별하는 과정을 담은 규약 및 절차입니다.
+- stringprep은 특정 문자가 RFC 3454의 talbe에 포함되는지를 확인할 수 있는 method를 제공합니다 
 
 ```python
 import stringprep

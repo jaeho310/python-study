@@ -1,9 +1,15 @@
+import atexit
+import os
 import readline
 
-readline.parse_and_bind('tab: complete')
-readline.parse_and_bind('set editing-mode vi')
-while True:
-    line = raw_input('Prompt ("stop" to quit): ')
-    if line == 'stop':
-        break
-    print('ENTERED: "%s"' % line)
+histfile = os.path.join(os.path.expanduser("./"), "my_history")
+try:
+    readline.read_history_file(histfile)
+    readline.set_history_length(1000)
+except FileNotFoundError:
+    pass
+
+print("ready to write history")
+atexit.register(readline.write_history_file, histfile)
+
+# exec(open("/root/python-study/readline/study_readline.py").read())
