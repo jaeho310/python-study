@@ -2,14 +2,16 @@
 
 ## 개요
 - Test Processing Services
-    - [re](study_re.md)
-    - [stringprep](study_stringprep.md)
-    - [readline](study_readline.md)
-    - [rlcompleter](study_rlcompleter.md)
+    - [re](./re/study_re.md)
+    - [stringprep](./stringprep/study_stringprep.md)
+    - [readline](./readline/study_readline.md)
+    - [rlcompleter](./rlcompleter/study_rlcompleter.md)
 - Binary Data Service
-    - [struct](study_struct.md)
-    - [codecs](study_codecs.md)
+    - [struct](./struct/study_struct.md)
+        - [files](./file/study_file.md)
+    - [codecs](./codecs/study_codecs.md)
 
 ## 참조
 - [정규표현식 사이트](http://regexr.com)
 - [RFC 3454](https://datatracker.ietf.org/doc/html/rfc3454.html#appendix)
+- [아스키코드표](https://mblogthumb-phinf.pstatic.net/20160211_209/ansdbtls4067_1455192707460IhXKg_JPEG/ASCII_Code_%25EC%259D%25BC%25EB%259E%258C%25ED%2591%259C_-_%25EC%259E%2591%25EC%2584%25B1%25EC%259E%2590_-_%25EB%2595%259C%25EC%2593%25B0001.png?type=w800)
