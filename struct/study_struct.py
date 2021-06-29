@@ -10,6 +10,7 @@ print(var)
 upvar = struct.unpack('iiiii', var)
 print(upvar)
 print(type(upvar))
+# (15, 16, 17, 255, 256)
 # output <class 'tuple'>
 
 # byte 사이즈 확인

@@ -18,6 +18,7 @@ print(var)
 upvar = struct.unpack('iiiii', var)
 print(upvar)
 print(type(upvar))
+# (15, 16, 17, 255, 256)
 # output <class 'tuple'>
 
 # byte 사이즈 확인
@@ -27,7 +28,7 @@ print(size)
 ```
 
 ## struct를 사용하는 이유
-- 실제로 byte데이터를 읽어와야 할때 사용합니다.
+- 실제로 byte데이터를 읽어와야 할때 사용할 수 있습니다.
 - tcp 통신 같은곳에서는 실제로 byte 배열을 사용합니다.(모듈이 갖춰져있어도 내부적으로는 byte[]형식을 주고받습니다)
 - c언어같은 곳에서는 byte단위로 파일을 저장하는 경우가 많습니다.(파이썬에서 직접 pack 하여 저장하는것과 같은 원리입니다.)
 - c언어로 struct를 저장하여 binary파일을 만들어 file을 읽는 예제입니다.

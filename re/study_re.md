@@ -1,9 +1,9 @@
 # re
 
 ## 정규표현식이란
-```
-문자열을 처리하는 방법중 하나로 특정한 조건의 문자를 검색하거나 추출, 치환 하는데 사용됩니다.
-```
+- 문자열을 처리하는 방법중 하나로 특정한 조건의 문자를 검색하거나 추출, 치환 하는데 사용됩니다.
+
+
 ### 기본 메타 문자
 기호|설명
 ---|---
@@ -14,7 +14,6 @@
 \- | 범위 정의
 \\ | 다음에 오는 문자를  이스케이프
 
-<br>
 <br>
 <br>
 
@@ -31,7 +30,6 @@
 
 <br>
 <br>
-<br>
 
 ### 위치 관련(\를 사용할떄는 r을 사용)
 기호 | 설명
@@ -42,7 +40,6 @@ $|문자열의 끝과 일치
 \B|단어 비경계 일치
 \A|^와 동일하지만 re.MULTILINE을 사용한경우에도 처음에만 매치
 
-<br>
 <br>
 <br>
 
@@ -58,12 +55,10 @@ $|문자열의 끝과 일치
 
 <br>
 <br>
-<br>
 
 ## Regex 모듈 re
-```
-re.compile의 결과로 돌려주는 reex 객체를 사용합니다.
-```
+- re.compile의 결과로 돌려주는 reex 객체를 사용합니다.
+
 ```python
 import re
 
@@ -88,6 +83,7 @@ text = "hello world"
 regex = re.compile("[a-z]+.[a-z]")
 result =  regex.match(text)
 print(result)
+# output = <re.Match object; span=(0, 7), match='hello w'>
 ```
 
 ### search()
@@ -98,6 +94,8 @@ text = "12345 hello world"
 regex = re.compile("[a-z]+.[a-z]")
 result =  regex.search(text)
 print(result)
+# output = <re.Match object; span=(6, 13), match='hello w'>
+# match는 앞에서부터 일치하는지 확인하지만 search는 뒤에있어도 찾습니다.
 ```
 
 ### findall()
@@ -121,26 +119,19 @@ print(result)
 ```
 
 ## match 객체의 메서드
-```
-match 객체는 검색된 문자열과, 위치를 확인하는 메서드를 제공합니다.
-group, start, end, span 메서드를 통해 확인할 수 있습니다.
-저는 result라는 변수명에 담아놓았습니다.
-```
+- regex.match(), regex.search()에 결과로 리턴되던 re.Match object의 설명입니다. 
+- match 객체는 검색된 문자열과, 위치를 확인하는 메서드를 제공합니다.
+- group, start, end, span 메서드를 통해 확인할 수 있습니다.
 
-```python
-import re
-text = "12345 hello world"
-regex = re.compile("[a-z]+.[a-z]")
-result =  regex.search(text)
-print(result)
-```
 
-## 모듈 단위로 축약하여 사용
+
+## 모듈 단위로 축약하여 사용 가능
 ```python   
 import re
 text = "hello world"
-result = re.match('[a-z]', text)
-print(result)
+regex = re.match("[a-z]+.[a-z]", text)
+print(regex.group())
+# output hello w
 ```
 
 ## 컴파일 옵션
@@ -153,29 +144,36 @@ VERBOSE | verbose모드를 사용
 
 
 ### DOTALL, S
+- . 메타문자는 모든 문자와 매치되지만 줄바꿈 문자와 매치되지않습니다.
+- DOTALL옵션을 사용하면 줄바꿈 문자와도 매치됩니다.
 ```python
 # DOTALL 예제
 import re
 regex1 =  re.compile('a.b')
 result1 = regex1.match('a\nb')
+# output : None
 
 regex2 = re.compile('a.b', re.DOTALL)
 result2 = regex2.match('a\nb')
-```
-```
-여러줄로 이루어진 문자열에서 \n에 상관없이 검색이 가능합니다.
+# output : <re.Match object; span=(0, 3), match='a\nb'>
 ```
 
 ### IGNORECASE, I
+- 대소문자를 구분하지 않고 매치시킵니다.
+
 ```python
 # IGNORECASE 예제
 import re
 regex =  re.compile('[a-z]+', re.I)
 result = regex.match('HELLO')
 print(result)
+# output : <re.Match object; span=(0, 5), match='HELLO'>
 ```
 
 ### MULTILINE, M
+- ^, $ 문자는 시작과 끝에 적용되지만 
+- multiline을 적용시키면 모든줄에 적용됩니다.
+- multiline을 사용하더라도 시작에서만 검사하려면 (\A를 사용합니다.)
 ```python
 # MULTILINE 예제
 import re
@@ -190,15 +188,13 @@ you need python
 python three"""
 
 print(p.findall(data))
-```
-```
-re.MULTILINE 옵션을 사용하면  
- ^, $ 메타 문자를 문자열의 모든 줄에 적용할수 있습니다.
+# output
+# ['python one', 'python two', 'python three']
 ```
 
 ### VERBOSE, X
-줄바꿈, 주석을 위해 사용됩니다.
-[]외부에 들어간 주석, whitespace는 모두 제거됩니다.
+- 줄바꿈, 주석을 위해 사용됩니다.
+- []외부에 들어간 주석, whitespace는 모두 제거됩니다.
 
 ```python
 import re
@@ -208,12 +204,14 @@ bb@naver.com
 """
 regex = re.compile("""
 ^[a-z0-9]+          # 숫자나 문자 반복
-@[a-z]+             # @에 숫자조합 반복
-.[a-z]{2,4}$        # .에 2~4번 반복되는 문자 반복(.com)
+@[a-z]+             # @뒤에 문자조합 반복
+.[a-z]{2,4}$        # .뒤에 2~4번 반복되는 문자 반복(.com)
 """
 ,re.MULTILINE|re.IGNORECASE|re.VERBOSE)
 result = regex.findall(data)
 print(result)
+# output
+# ['aa@gmail.com', 'bb@naver.com']
 ```
 
 ### 백슬래시 관련
@@ -226,18 +224,19 @@ data = "\section"
 regex1 = re.compile("\section")
 result1 = regex1.match(data)
 print(result1)
-
-print("#################################")
+# " ection"을 앞에서부터 찾으므로 output은 None 
+# output None
 
 # 백슬래시는 뒤에 문자를 문자 그대로 읽으라는 기호이므로 
-# \\을 \로 변경시키고, 총 네개의 백슬래시가 필요합니다.
+# \\을 \로 변경되므로 총 네개의 백슬래시가 필요합니다.
 regex2 = re.compile("\\\\section")
 result2 = regex2.match(data)
 print(result2)
+# output <re.Match object; span=(0, 8), match='\\section'>
 
 print("#################################")
 
-# 앞에 r을 붙여 두개만 사용합니다.
+# 앞에 r을 붙여 두개만 사용할 수 있습니다.
 regex3 = re.compile(r"\\section")
 result3 = regex3.match(data)
 print(result3)
@@ -245,7 +244,7 @@ print(result3)
 ```
 
 ### 그루핑
-()기호를 사용하여 group 화 시켜서 사용할 수 있다.
+- ()기호를 사용하여 group 화 시켜서 사용할 수 있습니다.
 ```python
 import re
 
@@ -283,7 +282,7 @@ print(result.group(1))
 ```
 
 ### 그룹에 이름 부여하기
-(?P<그룹명>...) 를 사용하여 그룹에 이름을 부여할 수 있습니다.
+- (?P<그룹명>...) 를 사용하여 그룹에 이름을 부여할 수 있습니다.
 ```python
 import re
 
@@ -304,10 +303,8 @@ print(result.group("phone"))
 ```
 
 ### 긍정형 전방 탐색
-<p>
-http://127:0.0.1 라는 문자열에서 http:를 탐색하되, :는 제외하는 예제입니다.<br>
-(?=...) 를 사용하여 탐색합니다.
-</p>
+- (?=...) 를 사용하여 탐색합니다.
+- http://127:0.0.1 라는 문자열에서 http:를 탐색하되, :는 제외하는 예제입니다.
 
 ```python
 import re
@@ -321,19 +318,11 @@ print(result.group())
 # http
 ```
 
-### 부정형 전방 탐색
+### 부정형 전방 탐
+- (?!=...) 를 사용하여 탐색합니다.
+- 여러개의 파일명을 읽어온후 .cpp만 제외하여 추출하는 예제입니다.
 
 ```python
-import re
-
-data = """
-example.py
-test.txt
-myjava.java
-mycsharp.cs
-mycplusplus.cpp
-"""
-
 # .cpp로 끝나는 파일을 제외한 파일만 추출
 import re
 
@@ -349,7 +338,7 @@ mycplusplus.cpp
 regex = re.compile("""
 ^[a-z]+                 # 소문자로 된 문자 반복
 [.]                     # .을 꼭 포함([]안에 넣지 않으면 어떤문자든 인식하는기호)
-(?!cpp$)                # cpp를 탐색하지 않는다.
+(?!cpp$)                # cpp로 끝나는건 탐색하지 않는다.
 [a-z]+$                 # 소문자로 된 문자가 반복되어 끝
 """, re.MULTILINE|re.VERBOSE)
 result = regex.findall(data)
@@ -360,7 +349,7 @@ print(result)
 ```
 
 ### 문자열 바꾸기
-sub 메서드를 사용하여 매치되는 부분을 다른 문자로 변경(\g로 그루핑된부분 참조)
+- sub 메서드를 사용하여 매치되는 부분을 다른 문자로 변경(\g로 그루핑된부분 참조)
 ```py
 import re
 
@@ -383,8 +372,8 @@ print(result)
 # 800101-*******
 ```
 
-
 ### Greedy vs Non-Greedy
+- \* 같이 반복성격의 메타문자는 ?를 사용하여 탐욕을 억제합니다.
 ```py
 import re
 
@@ -395,11 +384,12 @@ regex = re.compile('<.*>')
 result = regex.match(data)
 print(result.group())
 # *은 greedy한 특성때문에 마지막에 있는 tr까지 찾아버립니다.
-
+# output: <tr><td>a</td><td>b</td><tr>
 
 # Non-Greedy
 regex = re.compile('<.*?>')
 result = regex.match(data)
 print(result.group())
 # non-greedy한 문자인 ?를 이용하여 *의 탐욕을 제거합니다.
+# output: <tr>
 ```
