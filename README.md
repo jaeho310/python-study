@@ -1,7 +1,7 @@
 # python-study
 
 ## 개요
-- Test Processing Services
+- Text Processing Services
     - [re](./re/study_re.md)
     - [stringprep](./stringprep/study_stringprep.md)
     - [readline](./readline/study_readline.md)
