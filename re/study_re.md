@@ -57,7 +57,7 @@ $|문자열의 끝과 일치
 <br>
 
 ## Regex 모듈 re
-- re.compile의 결과로 돌려주는 reex 객체를 사용합니다.
+- re.compile의 결과로 돌려주는 regex 객체를 사용합니다.
 
 ```python
 import re

@@ -1,8 +1,8 @@
 # codecs
 
 ## codecs란
-- file을 인코딩형식에 맞춰 encode decode할수 있도록 정의해놓은 모듈
-- 레거시를 위해 남아있으며 현재는 사용되지 않는다
+- file을 인코딩형식에 맞춰 encode decode할수 있도록 정의해놓은 모듈입니다.
+- 레거시를 위해 남아있으며 현재는 사용되지 않습니다.
 
 ## 현재는 사용되지 않는 이유
 - python 2.6 이후 io 모듈에 codecs 의 상위호환인 io.open이 생겼으며
