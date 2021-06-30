@@ -124,6 +124,10 @@ html은 파일서명이 3C 21 44 4F 43 54 입니다. 가능합니다.
 </p>
 </details>
 
+<br>
+<br>
+<br>
+
 ## int vs char
 - int는 4byte char는 1byte로 사용됩니다.
 - int로 2를 저장하면 4byte를 사용하고, char로 2를 저장하면 1byte를 사용합니다.
