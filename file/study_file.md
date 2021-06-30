@@ -1,5 +1,8 @@
 # txt, pdf, pptx 파일이 저장되고 구분되는 원리
 
+
+- [magicnumber](https://blog.naver.com/PostView.nhn?isHttpsRedirect=true&blogId=gaegurijump&logNo=110186211008&parentCategoryNo=&categoryNo=42&viewDate=&isShowPopularPosts=true&from=search)
+
 ## 2진수와 16진수
 ```
 컴퓨터는 반도체소자들의 집합체이며 각 소자들은 전류가 흐르면 1 흐르지 않으면 0을 표현합니다.(2진법사용)
@@ -10,12 +13,12 @@
 1byte(8bit) 11111111은 10진수로 255(1+2+4+8+16+32+64+128)이며 16진수로 FF(16*15+15)입니다. 
 
 1byte의 내용을 확인하기 위해서는 11111111 총 8자리의 2진수를 써야하지만 16진수로는 단 2자리 FF만 사용하면 되므로
-보통 16진수 2자리에 1byte를 표현합니다.
+보통 16진수 2자리에 1byte를 표현합니다.(16진수는 접두사로 0x를 붙여주는 경우가 많습니다. 0xff)
 
 1byte는 8bit 
 2진수로 1 ~ 11111111
 10진수로 1 ~ 256
-16진수로 1 ~ 0xFF
+16진수로 1 ~ 0xff
 ```
 
 ## UNICODE
@@ -34,40 +37,98 @@
     - 유니코드를 위한 가변 길이 문자 인코딩(한글은 3byte 영어는 1byte ASCII는 그대로)
     - ANSI의 단점을 보완한 방식입니다.
 
-## char로 file을 직접 만들어 확인
+## txt에디터로 file을 직접 만들어 확인
 - 1A를 txt파일에 입력하고 저장합니다.
 - 아래의 명령어로 인코딩과 byte를 확인합니다.
+- [아스키코드표](https://mblogthumb-phinf.pstatic.net/20160211_209/ansdbtls4067_1455192707460IhXKg_JPEG/ASCII_Code_%25EC%259D%25BC%25EB%259E%258C%25ED%2591%259C_-_%25EC%259E%2591%25EC%2584%25B1%25EC%259E%2590_-_%25EB%2595%259C%25EC%2593%25B0001.png?type=w800) 를 보고 확인합니다.
 
-```bash
+```sh
 # charset이 ASCII인것을 확인할 수 있습니다.
 $ file -i [filename]
 test.txt: text/plain; charset=us-ascii
 
 # 3141 이 저장되었습니다.
 # 31는 문자1을 41은 문자A를 나타내는 16진수입니다.
+# 3141이 들어가있습니다(31,41은 1A)
+# 우측에는 ASCII로 디코드 해서 나온 문자들을 보여줍니다.
 $ xxd [filename]
 00000000: 3141                                     1A
 
 # 1byte를 16진수 두자리로 보는게 싫고 
 # 2진수로 보고싶다면(8개의 bit를 보고싶다면) -b 옵션을 입력합니다.
-# 16진수의 
 $ xxd -b [filename]
 00000000: 00110001 01000001                                      1A
 ```
+## 한글을 저장하고 확인
+- txt파일에 ㄱ을 추가로 입력하고 저장한후 확인합니다.
+```sh
+# charset이 utf-8로 변경되었습니다.(유니코드를 utf-8로 인코딩해서 저장됐습니다. 툴(메모장, vscode, intellij, atomm 등)이 자동으로 utf-8로 설정하여 저장해준겁니다.)
+$ file -i [filename]
+test.txt: text/plain; charset=utf-8
+
+# ASCII 코드는 8byte가 아니라 7byte만 사용합니다.(하나의 비트는 다른 용도로 사용)
+# 따라서 최대숫자는 7F이고 앞자리에 7보다 큰 수(8,9,a,b,c,d,e)가 들어간다면 ascii코드의 인코딩은 깨지게됩니다.
+# 우측은 ASCII로 디코딩 된 문자를 보여주는데 ...은 세개의 문자가 꺠진겁니다.
+# 이 바이너리들을 열때는 UTF-8로 열어줘야 한글이 정상적으로 표시됩니다.
+# 툴(메모장)이 보통 해줍니다.
+$ xxd [filename]
+00000000: 3141 e384 b1                             1A...
+```
+
+## txt 파일이란?
+- 바이너리파일을 ascii utf 등으로 디코드하여 읽는 파일입니다.
+- 유니코드를 특정 방식으로 인코딩하여 바이너리로 저장되는 파일입니다.
+
+```
+사람은 바이너리를 읽을 수 없기때문에 툴의 도움을 받아 읽습니다.
+운영체제는 txt라는 확장자를 가진 파일을 특정한 툴(ex 메모장)을 이용해 열어줍니다.
+확장자를 입력하지 않으면 어떤툴을 이용해서 열지 선택할 수 있습니다.
+그림판을 선택하면 열리지 않습니다. 
+```
+## 내가 만든 바이너리가 그림판으로 열리지 않는 이유
+- file signature(magic number)가 틀렸기 때문입니다.
+- [file signature](https://blog.naver.com/PostView.nhn?isHttpsRedirect=true&blogId=gaegurijump&logNo=110186211008&parentCategoryNo=&categoryNo=42&viewDate=&isShowPopularPosts=true&from=search) 는 해당사이트에서 확인할 수 있습니다.
+```
+운영체제의 그림판, 파워포인트, 어도비, 웹 브라우저 같은 툴은 확장자와 file signature(magic number)를 확인한 후 열어줍니다.
+pdf파일은 웹브라우저 or 어도비로, pptx는 파워포인트로, png파일은 그림판으로, html파일은 웹 브라우저로 열어야 합니다.
+파일의 확장자를 변경해서 운영체제에게 그 툴로 열어달라고 알려줘봐야 filesignature가 없어서 열리지 않습니다.
+```
+
+## 내가 만든 바이너리를 메모장 말고 웹브라우저나 그림판으로 열수는 없을까?
+- 가능한것도 있고 가능하지 않은것도 있습니다.
+
+## 그림판으로 열기
+```
+아스키코드는 7bit로 7F가 최대크기입니다. 파일시그니쳐가 그 이상의 값을 갖고있지 않다면 가능합니다. 
+png는 첫 바이트부터 ef라 그림판은 불가능합니다.
+binary코드를 메모장으로 직접 열어서라도 복사하려고 확인하는 순간 파일서명은 깨져버리며, 다시는 그림판으로 조차 열수 없는 파일이 되버립니다.
+```
+
+## 가능한것들
+```
+html은 파일서명이 3C 21 44 4F 43 54 입니다. 가능합니다.
+아스키코드 3C 21 44 4F 43 54... 맨 위에 넣어주고 확장자를 변경합니다.
+```
+## html과 xml의 file signature를 ASCII로 디코딩한 결과
+<details><summary>click</summary>
+<p>
+
+```xml
+<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?>
+```
+```
+많이 봤던 모습입니다.
+```
+
+</p>
+</details>
 
 ## int vs char
 - int는 4byte char는 1byte로 사용됩니다.
 - int로 2를 저장하면 4byte를 사용하고, char로 2를 저장하면 1byte를 사용합니다.
 - 대신 char로 2+2를 하면 22가되고 int로 2+2를 하면 4가 됩니다.
 - 메모리와 byte 관점으로 생각해보겠습니다.
-
-## txt 파일이란?
-- 바이너리파일을 ascii utf 등으로 인코딩, 디코딩하여 읽고 쓰는 파일
-- 유니코드가 특정 방식으로 인코딩되어 바이너리로 저장되는 파일
-- 파일을 열어줄때도 해당 byte에 맞는 인코딩을 선택해서 열어야 정상적으로 인식합니다.
-
-## 다른파일들은?
-- pdf, pptx, png, html 등의 파일은 filesignature(magic number)를 가지고있습니다.
 
 
 output2 에는 {1,'A'}를 struct로 저장
