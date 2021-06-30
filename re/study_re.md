@@ -106,6 +106,7 @@ text = "life is too shrot"
 regex = re.compile("[a-z]+")
 result =  regex.findall(text)
 print(result)
+# output : ['life', 'is', 'too', 'shrot']
 ```
 
 ### finditer()
@@ -116,6 +117,8 @@ text = "life is too shrot"
 regex = re.compile("[a-z]+")
 result =  regex.finditer(text)
 print(result)
+# output : <callable_iterator object at 0x7fa0a480c550>
+# for루프를 돌릴수있는 iter 객체가 리턴됩니다.
 ```
 
 ## match 객체의 메서드

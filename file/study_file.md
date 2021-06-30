@@ -22,7 +22,8 @@
 ```
 file -i test.txt
 xxd test.txt
-txt파일로 저장되면 ansi, utf등으로 저장됩니다.
+txt파일로 저장되면 ascii, utf등으로 저장됩니다.
+직접 바이트를 확인하며 int와 chr의 차이를 확인해볼수 있습니다.
 
 output2 에는 {1,'A'}를 struct로 저장
 output3 에는 {'A'}을 struct로 저장
