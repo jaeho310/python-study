@@ -62,7 +62,8 @@ $ xxd -b [filename]
 ## 한글을 저장하고 확인
 - txt파일에 ㄱ을 추가로 입력하고 저장한후 확인합니다.
 ```sh
-# charset이 utf-8로 변경되었습니다.(유니코드를 utf-8로 인코딩해서 저장됐습니다. 툴(메모장, vscode, intellij, atomm 등)이 자동으로 utf-8로 설정하여 저장해준겁니다.)
+# charset이 utf-8로 변경되었습니다.(유니코드를 utf-8로 인코딩해서 저장됐습니다. 
+# 툴(메모장, vscode, intellij, atomm 등)이 자동으로 utf-8로 설정하여 저장해준겁니다.
 $ file -i [filename]
 test.txt: text/plain; charset=utf-8
 
