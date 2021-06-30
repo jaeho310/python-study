@@ -1,6 +1,5 @@
-import re
-
-text = "life is too shrot"
-regex = re.compile("[a-z]+")
-result =  regex.finditer(text)
-print(result)
+f = open("test123", 'wb')
+a = 3
+b = a.to_bytes(12, byt)
+f.write(b)
+f.close()

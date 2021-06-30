@@ -18,17 +18,6 @@
 16진수로 1 ~ 0xFF
 ```
 
-## file 확인
-```
-file -i test.txt
-xxd test.txt
-txt파일로 저장되면 ascii, utf등으로 저장됩니다.
-직접 바이트를 확인하며 int와 chr의 차이를 확인해볼수 있습니다.
-
-output2 에는 {1,'A'}를 struct로 저장
-output3 에는 {'A'}을 struct로 저장
-```
-
 ## UNICODE
 - 유니코드는 인코딩방식이 아니라 모든 문자를 2bytes의 숫자로 매핑시키는 방식입니다.(65536개(2^16), 유니코드3.0부터 110만개 이상)
 - 컴퓨터상에서 우리눈에 보이는 모든 문자,특수기호들은 모두 UNICODE에 매핑되어있습니다.
@@ -42,12 +31,45 @@ output3 에는 {'A'}을 struct로 저장
     - 8bit로 구성되어 256개의 문자를 표현합니다.
     - ANSI = ASCII + CodePage(1bit)
 - UTF-8
-    - 유니코드를 위한 가변 길이 문자 인코딩(한글은 3byte 영어는 1byte)
+    - 유니코드를 위한 가변 길이 문자 인코딩(한글은 3byte 영어는 1byte ASCII는 그대로)
     - ANSI의 단점을 보완한 방식입니다.
 
+## char로 file을 직접 만들어 확인
+- 1A를 txt파일에 입력하고 저장합니다.
+- 아래의 명령어로 인코딩과 byte를 확인합니다.
+
+```bash
+# charset이 ASCII인것을 확인할 수 있습니다.
+$ file -i [filename]
+test.txt: text/plain; charset=us-ascii
+
+# 3141 이 저장되었습니다.
+# 31는 문자1을 41은 문자A를 나타내는 16진수입니다.
+$ xxd [filename]
+00000000: 3141                                     1A
+
+# 1byte를 16진수 두자리로 보는게 싫고 
+# 2진수로 보고싶다면(8개의 bit를 보고싶다면) -b 옵션을 입력합니다.
+# 16진수의 
+$ xxd -b [filename]
+00000000: 00110001 01000001                                      1A
+```
+
+## int vs char
+- int는 4byte char는 1byte로 사용됩니다.
+- int로 2를 저장하면 4byte를 사용하고, char로 2를 저장하면 1byte를 사용합니다.
+- 대신 char로 2+2를 하면 22가되고 int로 2+2를 하면 4가 됩니다.
+- 메모리와 byte 관점으로 생각해보겠습니다.
+
 ## txt 파일이란?
-- 유니코드가 특정 방식으로 인코딩되어 저장되는 파일
+- 바이너리파일을 ascii utf 등으로 인코딩, 디코딩하여 읽고 쓰는 파일
+- 유니코드가 특정 방식으로 인코딩되어 바이너리로 저장되는 파일
 - 파일을 열어줄때도 해당 byte에 맞는 인코딩을 선택해서 열어야 정상적으로 인식합니다.
 
 ## 다른파일들은?
 - pdf, pptx, png, html 등의 파일은 filesignature(magic number)를 가지고있습니다.
+
+
+output2 에는 {1,'A'}를 struct로 저장
+output3 에는 {'A'}을 struct로 저장
+```
