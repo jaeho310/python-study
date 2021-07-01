@@ -1,7 +1,4 @@
-# txt, pdf, pptx 파일이 저장되고 구분되는 원리
-
-
-- [magicnumber](https://blog.naver.com/PostView.nhn?isHttpsRedirect=true&blogId=gaegurijump&logNo=110186211008&parentCategoryNo=&categoryNo=42&viewDate=&isShowPopularPosts=true&from=search)
+# file and binary
 
 ## 2진수와 16진수
 ```
@@ -119,9 +116,6 @@ html은 파일서명이 3C 21 44 4F 43 54 입니다. 가능합니다.
 <!DOCTYPE html>
 <?xml version="1.0" encoding="UTF-8"?>
 ```
-```
-많이 봤던 모습입니다.
-```
 
 </p>
 </details>
@@ -132,10 +126,48 @@ html은 파일서명이 3C 21 44 4F 43 54 입니다. 가능합니다.
 ## int vs char
 - int는 4byte char는 1byte로 사용됩니다.
 - int로 2를 저장하면 4byte를 사용하고, char로 2를 저장하면 1byte를 사용합니다.
-- 대신 char로 2+2를 하면 22가되고 int로 2+2를 하면 4가 됩니다.
-- 메모리와 byte 관점으로 생각해보겠습니다.
+- 숫자보다 문자가 메모리를 덜 사용하는것 같습니다.
+- 숫자를 키워보겠습니다.
 
+## 4byte에 표현할 수 있는 숫자
+- char를 사용했을때 4byte에 넣을수 있는 가장 큰수
+    - <details><summary>click</summary>
+        <p>
 
-output2 에는 {1,'A'}를 struct로 저장
-output3 에는 {'A'}을 struct로 저장
-```
+        ```
+        십진법(문자): 9999
+        십육진법: (0x39 0x39 0x39 0x39)
+        이진법: 0111001 4번 반복
+        1byte에 문자를 하나씩 표현하므로 9를 네개 이어붙이면 가장 큽니다.
+        ```
+
+        </p>
+        </details>
+- int를 사용했을때 4byte에 넣을수 있는 가장 큰수
+    - <details><summary>click</summary>
+        <p>
+
+        ```
+        4byte는 32bit이므로 총 
+        2^32  = 4,294,967,296 의 수를 표현할 수 있습니다.
+        그중 반은 음수, 반은 양수를 표현한다고 생각하면 
+        32칸의 2진수로 나타낼수 있는 가장 큰수는
+        4,294,967,296 / 2 = 2,147,483,648 쯤 됩니다.
+        (정확한 int32 의 범위는 –2,147,483,648 ~ 2,147,483,647 입니다.)
+
+        십진법(숫자): 2,147,483,647
+        십육진법:  (0xff 0xff 0xff 0xff)
+        이진법 : 11111111 4번 반복
+        ```
+
+        </p>
+        </details>
+
+## int vs char
+- 같은 공간 사용하더라도 모든 공간을 진짜 숫자로 사용 vs 일정한 숫자를 문자로 해석(ASCII 등으로 디코딩)해서 사용
+
+## char의 binary를 얻는 방법
+- char형은 메모장을 열어서 저장하면(혹은 내장라이브러리 python open, read를 사용하면) ascii 등으로 인코딩되어 원하는 바이너리를 얻을 수 있습니다.
+
+## int의 binary를 얻는 방법
+- struct를 사용합니다.

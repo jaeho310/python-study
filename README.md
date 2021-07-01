@@ -7,8 +7,8 @@
     - [readline](./readline/study_readline.md)
     - [rlcompleter](./rlcompleter/study_rlcompleter.md)
 - Binary Data Service
+    - [file and binary](./file/study_file.md)
     - [struct](./struct/study_struct.md)
-        - [files](./file/study_file.md)
     - [codecs](./codecs/study_codecs.md)
 
 ## 참조
