@@ -27,12 +27,7 @@ print(size)
 # output 20
 ```
 
-## struct를 사용하는 이유
-- 실제로 byte데이터를 읽어와야 할때 사용할 수 있습니다.
-- tcp 통신 같은곳에서는 실제로 byte 배열을 사용합니다.(모듈이 갖춰져있어도 내부적으로는 byte[]형식을 주고받습니다)
-- c언어같은 곳에서는 byte단위로 파일을 저장하는 경우가 많습니다.(파이썬에서 직접 pack 하여 저장하는것과 같은 원리입니다.)
-- c언어로 struct를 저장하여 binary파일을 만들어 file을 읽는 예제입니다.
-
+## struct를 사용하여 byte 파일 읽어오기
 
 ```c
 #include <stdio.h>
@@ -57,8 +52,8 @@ int main() {
 import struct
 with open('output', 'rb') as f:
     # 8 + 4 + 1 = 13 이지만 구조체는 4바이트씩 공간을 확보하므로 16바이트를 읽어야한다.
-    chunk = f.read(16)
-    result = struct.unpack('dicccc', chunk)
+    byte_data = f.read(16)
+    result = struct.unpack('dicccc', byte_data)
     print(result)
 
 # 뒤에 3자리는 패딩값
