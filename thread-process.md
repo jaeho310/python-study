@@ -174,14 +174,16 @@ if __name__ == "__main__":
 
 ### 예상되는 cpu 사용량(c#, python 순서)
 <div>
-<img src="./expect2.PNG" width="30%" height="20%">
-<img src="./expect.PNG" width="30%" height="20%"> 
+<img src="./expect2.PNG" width="40%" height="20%">
+<img src="./expect.PNG" width="40%" height="20%"> 
 </div>
 
 
 ### 실제 cpu 사용량(c#, python 순서)
-<img src="./python.PNG" width="30%" height="20%">
-<img src="./dotnet.PNG" width="30%" height="20%">
+<div>
+<img src="./python.PNG" width="40%" height="20%">
+<img src="./dotnet.PNG" width="40%" height="20%">
+</div>
 
 운영체제는 cpu를 그런식으로 동작시키지 않습니다.
 
