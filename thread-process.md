@@ -173,9 +173,11 @@ if __name__ == "__main__":
 <br>
 
 ### 예상되는 cpu 사용량(c#, python 순서)
-
+<div>
 <img src="./expect2.PNG" width="30%" height="20%">
-<img src="./expect.PNG" width="30%" height="20%">
+<img src="./expect.PNG" width="30%" height="20%"> 
+</div>
+
 
 ### 실제 cpu 사용량(c#, python 순서)
 <img src="./python.PNG" width="30%" height="20%">
