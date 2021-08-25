@@ -46,7 +46,8 @@ job이 많이 생성되야 하는경우 프로세스를 나눠 처리하는 방�
 -   tcp
 -   http api
 -   dbms (sqlite, h2 등 filedb가 아닌 db서버)
--   네트워크 메시지큐(kafka, rabbitMQ, memcache 등)
+-   네트워크 메시지큐(kafka, rabbitMQ 등)
+-   캐시 시스템 이용(redis, memcached 등)
 
 ## (1). file
 
@@ -104,7 +105,7 @@ if __name__ == '__main__':
 
 ## (3). 커널 메시지큐(kernel messageq)
 
-현대의 메시지큐는 커널의 메시지큐가 아닌 네트워크 메시지큐(kafka, rabbitMQ, memcache 등) 를 칭하여
+현대의 메시지큐는 커널의 메시지큐가 아닌 네트워크 메시지큐(kafka, rabbitMQ 등) 를 칭하여
 
 운영체제의 메시지큐는 커널 메시지큐, 운영체제 메시지큐 라고 부릅니다.
 
@@ -268,7 +269,7 @@ s.serve_forever()
 
 ## (7). messageq
 
-kafka, rabbitMQ, memcache 등의 네트워크 메시지큐를 이용하는 방법입니다.
+kafka, rabbitMQ 등의 네트워크 메시지큐를 이용하는 방법입니다.
 
 MSA같은 환경에서 http api요청은 여러 프로세스간의 통신과정중 어디선가 병목에 걸려 성능저하가 발생하는경우가 빈번합니다.
 
