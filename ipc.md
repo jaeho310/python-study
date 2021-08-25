@@ -266,7 +266,7 @@ s.serve_forever()
 
 장고, 플라스크 등 웹 프레임워크는 해당 라이브러리를 래핑하고 필요한 기능을 추가하여 개발 편의성을 높여준 프레임 워크입니다.
 
-## (7). messagq
+## (7). messageq
 
 kafka, rabbitMQ, memcache 등의 네트워크 메시지큐를 이용하는 방법입니다.
 
