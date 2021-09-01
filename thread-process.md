@@ -175,7 +175,7 @@ if __name__ == "__main__":
 ### 예상되는 cpu 사용량(c#, python 순서)
 <div>
 <img src="./expect2.PNG" width="40%" height="20%">
-<img src="./expect.PNG" width="40%" height="20%"> 
+<img src="./expect.PNG" width="40%" height="20%">
 </div>
 
 
@@ -184,8 +184,6 @@ if __name__ == "__main__":
 <img src="./python.PNG" width="40%" height="20%">
 <img src="./dotnet.PNG" width="40%" height="20%">
 </div>
-
-운영체제는 cpu를 그런식으로 동작시키지 않습니다.
 
 c#으로 작성한 프로그램에서는 cpu사용량이 평균적으로 60~70이 나왔고
 
@@ -199,7 +197,7 @@ python으로 작성한 프로그램에서는 cpu사용량이 평균적으로 40~
 
 파이썬은 GIL(Global Interpreter Lock)이 존재하여 동시에 하나의 코어에서만 일을 하는 언어입니다.
 
-빠르게 여러개의 코어를 왔다갔다하는 방식으로 cpu를 사용합니다.
+빠르게 여러개의 코어를 왔다갔다하는 방식으로 cpu를 사용합니다.(컨텍스트 스위칭)
 
 스레드를 아무리 쪼개봐야 cpu를 동시에 사용하지 못합니다.
 
